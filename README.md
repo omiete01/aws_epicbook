@@ -173,7 +173,7 @@ sudo systemctl status nginx
 
 echo 'server {
     listen 80;
-    server_name your_domain_or_IP;
+    server_name your_domain_or_IP;  # input ec2 public ip here
 
     location / {
         proxy_pass http://localhost:8080;
@@ -184,12 +184,24 @@ echo 'server {
         proxy_cache_bypass $http_upgrade;
     }
 }' sudo tee /etc/nginx/conf.d/theepicbooks.conf > /dev/null
+
+sudo nginx -t    # Check for syntax errors
+sudo systemctl restart nginx
+
+node server.js # start application
 ```
 
-### 2. Connect to RDS from EC2 using the console
+### 3. Connect to RDS from EC2 using the console
 
 
 > 🔒 RDS is **not publicly accessible** — you **must connect via EC2** (or a bastion host).
+
+### 4. Verify the setup
+Check if the application is running:
+```bash
+http://<PublicIP>
+```
+If everything is set up correctly, you should see The EpicBook! application running.
 
 ---
 
