@@ -49,7 +49,7 @@ variable "rds_username" {
 variable "rds_password" {
   description = "The password of the RDS instance"
   type        = string
-  default     = "Password!23"
+  sensitive   = true
 }
 
 variable "rds_instance_class" {
